@@ -3,7 +3,7 @@ import BgShadow from "../../Components/Shared/BgComponents/BgShadow";
 import Button from "../../Components/Shared/Button/Button";
 import Logo from "../../assets/hooks/Animation/Logo/Logo";
 
-
+import { FcGoogle } from "react-icons/fc";
 const Login = () => {
     return (
         <div className=" w-screen  md:h-screen">
@@ -28,12 +28,17 @@ const Login = () => {
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
 
                     <BgShadow>
-                        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        <div className="md:w-[600px]  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                            <div className="p-6 space-y-3 md:space-y-3 sm:p-8">
+                                <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Welcome Back!
                                 </h1>
-                                <button className="btn w-full">Sign up with google</button>
+                                <button className="btn flex justify-center items-center gap-2 text-center w-full">
+
+
+                                    <FcGoogle /> Sign up with google
+
+                                </button>
                                 <form className="space-y-4 md:space-y-6" action="#">
                                     <div>
                                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -49,21 +54,23 @@ const Login = () => {
                                             <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
                                         </div>
                                         <div className="ml-3 text-sm">
-                                            <label className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                                            <label className="font-light text-gray-500 dark:text-gray-300">Remeber here <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">!</a></label>
                                         </div>
                                     </div>
-                                    <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
-                                    <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                        Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
-                                    </p>
+                                    <button type="submit" className="w-full btn text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+
                                 </form>
+                                <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+                                    Don't have an account?
+                                    <Link to='/signUp' className="font-medium ml-3 text-primary-600 hover:underline dark:text-primary-500">Sign Up</Link>
+                                </p>
                             </div>
                         </div>
                     </BgShadow>
                 </div>
-            </section>
+            </section >
 
-        </div>
+        </div >
     );
 };
 

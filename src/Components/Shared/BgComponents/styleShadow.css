@@ -6,8 +6,8 @@
     
   }
   .Sh:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 5em #646cffaa);
   }
   .Sh.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 5em #61dafbaa);
   }
