@@ -1,0 +1,12 @@
+.btn {
+    /* height: em; */
+    padding: 0.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .btn:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .btn.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
