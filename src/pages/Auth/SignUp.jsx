@@ -17,11 +17,13 @@ const SignUp = () => {
                     <nav className="flex px-10 py-5 justify-between">
                         <BgShadow> <h2 className="text-2xl font-bold">Task</h2></BgShadow>
                         <div className="flex items-center gap-2">
-                            <span>Don't have an account?
+                            <span>Already playing with Task App?
+
+
 
                             </span>
-                            <Link to='/signUp'>
-                                <Button text={"Sign Up"} />
+                            <Link to='/login'>
+                                <Button text={"Login"} />
                             </Link>
 
 
