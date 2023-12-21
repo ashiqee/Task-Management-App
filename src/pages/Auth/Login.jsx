@@ -1,19 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import BgShadow from "../../Components/Shared/BgComponents/BgShadow";
 import Button from "../../Components/Shared/Button/Button";
-import Logo from "../../assets/hooks/Animation/Logo/Logo";
+
 
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import Logo from "../../hooks/Animation/Logo/Logo";
 const Login = () => {
+    const { signIn, googleLogin } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation();
+
+    const from = location.state?.from.pathname || '/';
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+    }
+
+    const handleSignIn = (e) => {
+        e.preventDefault()
+        const form = e.target;
+
+
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signIn(email, password)
+        { navigate(from, { replace: true }) }
+
+    }
+
+
     return (
-        <div className=" w-screen  md:h-screen">
+        <div className="container mx-auto  ">
 
 
             <section className="">
                 <div>
                     <nav className="flex px-10 py-5 justify-between">
-                        <BgShadow> <h2 className="text-2xl font-bold">Task</h2></BgShadow>
-                        <div className="flex items-center gap-2">
+                        {/* <BgShadow> <h2 className="text-2xl font-bold">Task</h2></BgShadow> */}
+                        <Link to='/'><Logo height={96} /></Link>
+                        <div className="md:flex items-center gap-2">
                             <span>Don't have an account?
 
                             </span>
@@ -33,13 +60,13 @@ const Login = () => {
                                 <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Welcome Back!
                                 </h1>
-                                <button className="btn flex justify-center items-center gap-2 text-center w-full">
+                                <button onClick={handleGoogleLogin} className="btn flex justify-center items-center gap-2 text-center w-full">
 
 
                                     <FcGoogle /> Sign up with google
 
                                 </button>
-                                <form className="space-y-4 md:space-y-6" action="#">
+                                <form className="space-y-4 md:space-y-6" onSubmit={handleSignIn}>
                                     <div>
                                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                         <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />

@@ -11,7 +11,9 @@ const Loading = () => {
 
     const { View } = useLottie(options);
 
-    return <>{View}</>;
+    return <><div className="h-screen container mx-auto flex justify-center items-center">
+        {View}
+    </div></>;
 };
 
 export default Loading;

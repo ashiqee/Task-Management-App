@@ -1,9 +1,9 @@
 import React from 'react';
 import './style.css'
 
-const Button = ({ text }) => {
+const Button = ({ text, top }) => {
     return (
-        <div className="">
+        <div className={`mt-${top}`}>
             <button className="text-xl btn react">{text}</button>
         </div>
     );

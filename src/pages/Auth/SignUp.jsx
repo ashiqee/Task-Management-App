@@ -3,12 +3,16 @@ import BgShadow from "../../Components/Shared/BgComponents/BgShadow";
 import Button from "../../Components/Shared/Button/Button";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import Logo from "../../hooks/Animation/Logo/Logo";
 
 
 const SignUp = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordAlert, setPasswordAlert] = useState(null)
+    const { createUser, updateCurrentUser, googleLogin } = useAuth()
+
 
 
 
@@ -16,12 +20,17 @@ const SignUp = () => {
         setConfirmPassword(e.target.value)
         if (password !== e.target.value) {
             setPasswordAlert(true)
-            console.log('password doest match');
+
         } else {
             setPasswordAlert(false)
-            console.log('password matched');
+
         }
 
+    }
+
+
+    const handleGoogleLogin = () => {
+        googleLogin()
     }
 
     const handleSignUp = (e) => {
@@ -33,19 +42,27 @@ const SignUp = () => {
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
 
-        console.log(name, email, password, confirmPassword);
+        createUser(email, password).then((result) => {
+
+            const newUser = result.user;
+
+            updateCurrentUser(name).then(() => {
+                console.log('Update Success');
+            })
+        })
+
     }
     return (
 
 
 
-        <div className=" w-screen  md:h-screen">
+        <div className="container mx-auto">
 
 
             <section className="">
                 <div className="relative" >
                     <nav className="flex px-10 py-5 justify-between">
-                        <BgShadow> <h2 className="text-2xl font-bold">Task</h2></BgShadow>
+                        <Link to='/'><Logo height={96} /></Link>
                         <div className="flex items-center gap-2">
                             <span>Already playing with Task App?
 
@@ -68,7 +85,7 @@ const SignUp = () => {
                                 <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Let Go!
                                 </h1>
-                                <button className="btn flex justify-center items-center gap-2 text-center w-full">
+                                <button onClick={handleGoogleLogin} className="btn flex justify-center items-center gap-2 text-center w-full">
 
 
                                     <FcGoogle /> Sign up with google
