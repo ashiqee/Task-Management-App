@@ -44,27 +44,27 @@ const TaskData = () => {
 
 
     return (
-        <div className="">
+        <div className="bg-slate-900">
             <div className={isSideBarOpen ?
-                "ml-72 py-5 grid grid-cols-3"
+                "ml-72 py-5 grid grid-cols-1 md:grid-cols-3"
 
-                : "p-5 grid grid-cols-3 "} >
+                : "p-5 grid grid-cols-1 md:grid-cols-3 "} >
 
                 {/* TODO  */}
                 <div>
-                    <p className='font-semibold flex py-4 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
+                    <p className='font-semibold flex  py-4 sm:ml-7 md:ml-0 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
                         Todo ({todoData?.length})
                     </p>
                     <TodoColum refetch={refetch} columnStatus={"Todo"} data={todoData} />
                 </div>
                 <div>
-                    <p className='font-semibold flex py-4 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
+                    <p className='font-semibold flex py-4 sm:ml-7 md:ml-0 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
                         Ongoing ({ongoingData?.length})
                     </p>
                     <TodoColum refetch={refetch} columnStatus={"Ongoing"} data={ongoingData} />
                 </div>
                 <div>
-                    <p className='font-semibold flex py-4 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
+                    <p className='font-semibold flex py-4 sm:ml-7 md:ml-0 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
                         Done ({doneData?.length})
                     </p>
                     <TodoColum refetch={refetch} columnStatus={"Done"} data={doneData} />

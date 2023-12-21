@@ -2,6 +2,8 @@ import { useDrag, useDrop } from 'react-dnd'
 import { ItemTypes } from './ItemTypes.js'
 import useAxiosSecure from './../../hooks/useAxiosSecure';
 import BgShadow from '../Shared/BgComponents/BgShadow.jsx';
+import TaskDetails from '../../pages/Dashboard/Modal/TaskDetails.jsx';
+
 
 const style = {
     border: '1px solid gray',
@@ -14,6 +16,7 @@ const style = {
 }
 const TaskCard = ({ task, refetch }) => {
     const axiosSecure = useAxiosSecure()
+
 
 
 
@@ -60,15 +63,18 @@ const TaskCard = ({ task, refetch }) => {
     const opacity = isDragging ? 0.4 : 1
     return (
         <div ref={drag} className="border p-2  text-left rounded-md" style={{ opacity }}>
-            <BgShadow>
-                <div>
-                    {task.title}
-                    < br />
-                    <p className='text-sm  rounded-xl'>Priority: {task.taskPriority}</p>
-                    < br />
-                    {task.taskDeadLine}
-                </div>
-            </BgShadow>
+
+            <TaskDetails task={task} >
+                <BgShadow>
+                    <div >
+                        {task.title}
+                        < br />
+                        <p className='text-sm outline-red-600  rounded-xl'>Priority: {task.taskPriority}</p>
+                        < br />
+                        {task.taskDeadLine}
+                    </div>
+                </BgShadow>
+            </TaskDetails>
 
         </div >
     );

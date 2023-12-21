@@ -35,7 +35,7 @@ const TodoColum = ({ data, columnStatus, refetch }) => {
 
     // console.log(dropResult.status);
     return (
-        <div className='h-[calc(100vh-200px)] max-w-sm' ref={drop}  >
+        <div className='md:h-[calc(100vh-200px)] mx-auto md:mx-0 max-w-sm' ref={drop}  >
             {isOver && canDrop && <p className='text-green-600'>Release to drop</p>}
             <div className=' grid grid-cols-1 md:grid-flow-row gap-2  space-y-2 ' >
                 {data?.map((task, i) =>
