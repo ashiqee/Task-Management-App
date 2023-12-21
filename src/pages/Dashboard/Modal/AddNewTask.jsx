@@ -1,21 +1,25 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from './../../../Components/Shared/Button/Button';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
 const AddNewTask = ({ text }) => {
 
     const [isOpenModal, setOpenModal] = useState(false)
-    const [taskPriotity, setTaskPriority] = useState('Low')
+
     const { register, handleSubmit } = useForm()
+    const axiosSecure = useAxiosSecure()
 
 
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
+        data.status = "Todo";
         console.log(data);
 
-
+        await axiosSecure.post('/task', data).then((res) => {
+            console.log(res);
+        }).catch(error => console.log(error))
 
     }
 

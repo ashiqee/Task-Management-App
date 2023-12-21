@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import BgShadow from "../../Components/Shared/BgComponents/BgShadow";
 import Button from "../../Components/Shared/Button/Button";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Logo from "../../hooks/Animation/Logo/Logo";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const SignUp = () => {
@@ -12,6 +13,7 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordAlert, setPasswordAlert] = useState(null)
     const { createUser, updateCurrentUser, googleLogin } = useAuth()
+    const axiosPublic = useAxiosPublic()
 
 
 
@@ -33,7 +35,7 @@ const SignUp = () => {
         googleLogin()
     }
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault()
         const form = e.target;
 
@@ -41,14 +43,33 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
+        const occupation = form.occupation.value;
+        const profileImg = "https://cdn.pixabay.com/photo/2020/05/09/13/29/photographer-5149664_640.jpg"
 
+
+        const userInfo = {
+            name: name,
+            email: email,
+            profileImg: profileImg,
+            occupation: occupation,
+
+
+
+        }
         createUser(email, password).then((result) => {
 
             const newUser = result.user;
 
-            updateCurrentUser(name).then(() => {
+            updateCurrentUser(name, profileImg).then(() => {
                 console.log('Update Success');
             })
+        })
+
+        await axiosPublic.post('/user', userInfo).then(res => {
+            if (res.data.insertedId) {
+                console.log("User Registration Successfull");
+                <Navigate to='/'></Navigate>
+            }
         })
 
     }
@@ -99,9 +120,27 @@ const SignUp = () => {
                                             <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Joun Duo" required="" />
                                         </div>
                                         <div>
+                                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Occupation</label>
+                                            <input type="text" name="occupation" id="occupation" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Occupation" required="" />
+                                        </div>
+
+
+                                    </div>
+                                    <div className="space-y-2">
+                                        <div>
                                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                             <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
                                         </div>
+                                        <div>
+                                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User Photo</label>
+                                            <input type="file" name="photo" id="photo" className="bg-gray-50 
+                                             border border-gray-300 text-gray-900 sm:text-sm rounded-lg 
+                                             focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
+                                              dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                               dark:text-white dark:focus:ring-blue-500
+                                                dark:focus:border-blue-500" placeholder="" required="" />
+                                        </div>
+
 
                                     </div>
                                     <div className="md:flex mb-1  gap-4">

@@ -1,13 +1,13 @@
 .Sh {
     /* height: em; */
-    padding: 0.5em;
+    /* padding: 0.5em; */
     will-change: filter;
-    transition: filter 300ms;
+    transition: filter 600ms;
     
   }
   .Sh:hover {
-    filter: drop-shadow(0 0 5em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
   }
   .Sh.react:hover {
-    filter: drop-shadow(0 0 5em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
   }

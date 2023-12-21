@@ -1,13 +1,15 @@
 
-import Sidebar from "./SideBar";
+
 import NavbarDashboard from "./NavbarDashboard";
+import TaskData from "./TaskData/TaskData";
 
 
 const Dashboard = () => {
     return (
         <div>
             <NavbarDashboard />
-            <Sidebar />
+
+            <TaskData />
 
         </div>
     );
