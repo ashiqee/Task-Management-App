@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const axiosPublic = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://task-management-app-server-self.vercel.app",
     withCredentials: true,
 });
 

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://task-management-app-server-self.vercel.app",
     withCredentials: true,
 });
 
