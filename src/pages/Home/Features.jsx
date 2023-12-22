@@ -1,6 +1,6 @@
 import { FaCode, FaBuilding, FaMoneyBill } from 'react-icons/fa'
 import BgShadow from '../../Components/Shared/BgComponents/BgShadow';
-
+import { motion } from "framer-motion"
 const Features = () => {
     const occupasion = [
         {
@@ -36,13 +36,19 @@ const Features = () => {
                         {
                             occupasion.map((o, i) => (
                                 <BgShadow key={i}>
-                                    <div className="bg-base-100 space-y-4 p-6 min-h-[350px] rounded-lg animate-pulse hover:scale-100  shadow-lg">
+                                    <motion.div
+
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="bg-base-100 space-y-4 p-6 min-h-[350px] rounded-lg animate-pulse hover:scale-100  shadow-lg">
                                         <div className="w-12 mx-auto text-4xl text-center  text-[#84b9ff]">{o.icon} </div>
                                         <h3 className="text-xl text-[#2d72cb] font-semibold mb-4">{o.title}</h3>
 
                                         <p className="text-gray-100 text-justify">{o.description}</p>
 
-                                    </div>
+                                    </motion.div>
                                 </BgShadow>
                             ))
                         }

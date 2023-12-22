@@ -95,7 +95,8 @@ const TaskCard = ({ task, refetch }) => {
 
             <div ref={drag} className=" hover:shadow-2xl shadow-white   text-left rounded-md" style={{ opacity }}>
 
-                <div className="card w-full md:w-96 bg-base-100 shadow-xl">
+                <motion.div whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }} className="card w-full md:w-96 bg-base-100 shadow-xl">
                     <div className="flex justify-between px-5 items-center">
 
                         <div className='' >
@@ -120,7 +121,7 @@ const TaskCard = ({ task, refetch }) => {
 
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
 
 
@@ -129,7 +130,7 @@ const TaskCard = ({ task, refetch }) => {
 
 
             <ToastContainer />
-        </div>
+        </div >
     );
 };
 
