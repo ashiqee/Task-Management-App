@@ -87,7 +87,7 @@ const TaskData = () => {
 
             <SideBar isSideBarOpen={isSideBarOpen} />
 
-            {isSideBarOpen ? <><button className='text-sm  btn btn-outline flex items-center gap-4 ml-5 fixed mb-5 bottom-0 ' onClick={() => setSideBar(false)}> <FcShipped /> Hide Sidebar</button></>
+            {isSideBarOpen ? <><button className='text-sm  btn btn-outline flex items-center gap-4 ml-5 z-50 fixed mb-5 bottom-0 ' onClick={() => setSideBar(false)}> <FcShipped /> Hide Sidebar</button></>
                 : <> <button className='text-sm flex btn btn-outline  items-center gap-4 ml-5 fixed mb-5 bottom-0 ' onClick={() => setSideBar(true)}> <FcShipped /> Show Sidebar</button></>}
         </div>
     );

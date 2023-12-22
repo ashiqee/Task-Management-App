@@ -17,7 +17,7 @@ const SideBar = ({ isSideBarOpen }) => {
         <div>
             <div className={
                 isSideBarOpen ?
-                    "min-w-[261px]  bg-white dark:bg-[#2b2c37]  fixed top-[72px] h-screen  items-center left-0 z-0"
+                    "min-w-[261px]   bg-white dark:bg-[#2b2c37]  fixed top-[72px] h-screen  items-center left-0 z-0"
                     : ` `
             }>
 
@@ -31,7 +31,7 @@ const SideBar = ({ isSideBarOpen }) => {
                                 <span className='flex items-center text-white gap-2'> <FcHome />  Home</span>
                             </Link>
                         </div>
-                        <div className='bg-white pr-10 absolute bottom-40 left-5 pl-6 dark:bg-[#2d72cb]  py-2 rounded-xl'>
+                        <div className='bg-white pr-10   left-5 pl-6 dark:bg-[#2d72cb]  py-2 rounded-xl'>
 
                             <span type='button' onClick={() => logOut()} className='flex items-center cursor-pointer text-white gap-2'> <FaSignOutAlt />  Logout</span>
 

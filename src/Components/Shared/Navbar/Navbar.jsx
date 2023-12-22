@@ -12,9 +12,9 @@ const Navbar = () => {
     const activeCss = "border-b-4 p-2 pb-5 border-[#2d72cb] text-[#2d72cb] hover:border-white font-bold hover:text-white";
     const notActiveCss = "pb-5 p-2 text-white hover:border-b-4 font-bold border-[#2d72cb] hover:text-[#2d72cb]"
     const navMenu = <>
-        <ul className="flex gap-5 uppercase">
+        <ul className="md:flex gap-5 hidden uppercase">
             <li>
-                <NavLink to="/" qqb
+                <NavLink to="/"
                     className={({ isActive }) =>
                         isActive
                             ? activeCss
@@ -67,7 +67,12 @@ const Navbar = () => {
 
             <div>
                 {user ? <>   <div className="flex gap-3">
-                    <span><Button text={"Dashboard"} /></span>
+                    <span>
+                        <Link to='/dashboard'>
+                            <Button text={"Dashboard"} />
+                        </Link>
+
+                    </span>
                     <span onClick={() => logOut()}>
                         <Button text={"Sign Out"} />
                     </span>
