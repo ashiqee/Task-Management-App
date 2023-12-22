@@ -4,7 +4,10 @@ import useAxiosSecure from './../../hooks/useAxiosSecure';
 import BgShadow from '../Shared/BgComponents/BgShadow.jsx';
 import TaskDetails from '../../pages/Dashboard/Modal/TaskDetails.jsx';
 import Swal from 'sweetalert2';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import TaskEdit from '../../pages/Dashboard/Modal/TaskEdit.jsx';
+import { FcEditImage } from 'react-icons/fc';
 
 const style = {
     border: '1px solid gray',
@@ -19,7 +22,7 @@ const TaskCard = ({ task, refetch }) => {
     const axiosSecure = useAxiosSecure()
 
 
-
+    const notify = (msg) => toast(msg);
 
 
     const [{ isDragging }, drag] = useDrag(() => ({
@@ -39,6 +42,7 @@ const TaskCard = ({ task, refetch }) => {
                         axiosSecure.patch(`/task/${item._id}`, { status: dropResult.status }).then(res => {
                             if (res.data.modifiedCount > 0) {
                                 refetch()
+                                notify(dropResult.status)
                             }
                         }
                         )
@@ -95,26 +99,40 @@ const TaskCard = ({ task, refetch }) => {
 
 
     return (
-        <div ref={drag} className="border p-2  text-left rounded-md" style={{ opacity }}>
+        <div>
+            <div ref={drag} className=" hover:shadow-2xl shadow-white   text-left rounded-md" style={{ opacity }}>
+
+                <div className="card w-96 bg-base-100 shadow-xl">
+                    <div className="flex justify-between px-5 items-center">
+
+                        <div className='' >
+                            <TaskDetails task={task} >
+
+                                <h2 className='text-xl py-2'> {task.title}</h2>
+                                <p> Priority: {task.taskPriority}
+                                    <br />
+                                    {task.taskDeadLine}</p>
 
 
-            {/* <BgShadow> */}
-            <div className='flex items-center justify-between' >
-                <TaskDetails task={task} >
-                    {task.title}
-
-                    < br />
-                    <p className='text-sm  rounded-xl'>Priority: {task.taskPriority}</p>
-                    < br />
-                    {task.taskDeadLine}
-                </TaskDetails>
-                <span onClick={() => hadndleDeleteTask(task._id)} className=' btn rounded-full bg-slate-600'>X</span>
-
-            </div>
-            {/* </BgShadow> */}
+                            </TaskDetails>
 
 
-        </div >
+                        </div>
+                        <div className="card-actions items-center justify-end">
+                            <TaskEdit data={task} text={<FcEditImage />} />
+                            <button onClick={() => hadndleDeleteTask(task._id)} className="block text-white  focus:ring-4 focus:outline-none focus:ring-blue-300
+                 font-medium rounded-lg text-sm   text-center dark:focus:ring-blue-800" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div >
+            <ToastContainer />
+        </div>
     );
 };
 

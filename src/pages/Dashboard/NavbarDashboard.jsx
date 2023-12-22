@@ -2,12 +2,12 @@ import React from 'react';
 import { FcPlus, FcSerialTasks } from 'react-icons/fc';
 import useAuth from '../../hooks/useAuth';
 import AddNewTask from './Modal/AddNewTask';
-
+import { BsFillGridFill } from 'react-icons/bs';
 const NavbarDashboard = () => {
     const { user, logOut } = useAuth()
     return (
         <div className='flex items-center  bg-white dark:bg-[#2b2c37] justify-between'>
-            <div className="flex gap-2 p-5 text-2xl font-bold  items-center"> <FcSerialTasks /> <h2>TASK AM</h2></div>
+            <div className="flex gap-2 p-5 text-2xl font-bold uppercase  items-center"> <BsFillGridFill size={24} /> <h2>TASK AM Dashboard</h2></div>
             <div className='flex gap-2 mr-10'>
                 {/* <button className='btn bg-primary text-white px-10 rounded-3xl'><FcPlus /> Add New Task</button> */}
                 <AddNewTask text={'Add New Task'} />
