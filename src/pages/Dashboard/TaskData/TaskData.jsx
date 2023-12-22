@@ -3,8 +3,9 @@ import useTasksData from "../../../hooks/useTasksData";
 import SideBar from "../SideBar";
 import Loading from './../../../hooks/Animation/Loading/Loading';
 import { useEffect, useState } from "react";
-import Column from "../../../Components/Tasks/OngoingColumn";
+
 import TodoColum from "../../../Components/Tasks/TodoColum";
+import { useMediaQuery } from "react-responsive";
 
 const TaskData = () => {
     const { data, isPending, refetch } = useTasksData()
@@ -12,6 +13,7 @@ const TaskData = () => {
     const [todoData, setTodoData] = useState([])
     const [ongoingData, setOngoing] = useState([])
     const [doneData, setDoneData] = useState([])
+    const isSmallScreen = useMediaQuery({ query: '(max-width:600px)' })
 
 
     useEffect(() => {
@@ -33,12 +35,21 @@ const TaskData = () => {
 
 
     useEffect(() => {
+        if (isSmallScreen) {
+            setSideBar(false)
+        } else {
+            setSideBar(true)
+        }
+    }, [isSmallScreen])
+
+    useEffect(() => {
         refetch()
     }, [refetch, data])
 
     if (isPending) {
         return <><Loading /></>
     }
+
 
 
 
@@ -65,7 +76,7 @@ const TaskData = () => {
                 </div>
                 <div>
                     <p className='font-semibold flex py-4 sm:ml-7 md:ml-0 items-center gap-2 tracking-widest md:tracking-[.2em] text-white' >
-                        Done ({doneData?.length})
+                        Completed ({doneData?.length})
                     </p>
                     <TodoColum refetch={refetch} columnStatus={"Done"} data={doneData} />
                 </div>

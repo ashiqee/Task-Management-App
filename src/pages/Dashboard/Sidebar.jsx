@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { FcShipped } from 'react-icons/fc';
+import useTasksData from '../../hooks/useTasksData';
+
 
 const SideBar = ({ isSideBarOpen }) => {
+    const { data } = useTasksData()
 
 
 
@@ -16,7 +19,7 @@ const SideBar = ({ isSideBarOpen }) => {
 
                 {isSideBarOpen && <>
                     <div className='bg-white pl-6 dark:bg-[#2b2c37] w-full rounded-xl'>
-                        All Task
+                        All Task ({data?.length})
                     </div>
                 </>}
 

@@ -3,6 +3,7 @@ import { ItemTypes } from './ItemTypes.js'
 import useAxiosSecure from './../../hooks/useAxiosSecure';
 import BgShadow from '../Shared/BgComponents/BgShadow.jsx';
 import TaskDetails from '../../pages/Dashboard/Modal/TaskDetails.jsx';
+import Swal from 'sweetalert2';
 
 
 const style = {
@@ -27,9 +28,9 @@ const TaskCard = ({ task, refetch }) => {
         end: (item, monitor) => {
             const dropResult = monitor.getDropResult()
 
-            // console.log(dropResult);
+
             if (item && dropResult) {
-                // Update task status in MongoDB
+
                 try {
 
                     if (item)
@@ -61,20 +62,57 @@ const TaskCard = ({ task, refetch }) => {
 
 
     const opacity = isDragging ? 0.4 : 1
+
+    const hadndleDeleteTask = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosSecure.delete(`/task/${id}`).then(res => {
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        refetch()
+                    }
+                })
+
+
+            }
+        });
+
+
+    }
+
+
     return (
         <div ref={drag} className="border p-2  text-left rounded-md" style={{ opacity }}>
 
-            <TaskDetails task={task} >
-                <BgShadow>
-                    <div >
-                        {task.title}
-                        < br />
-                        <p className='text-sm outline-red-600  rounded-xl'>Priority: {task.taskPriority}</p>
-                        < br />
-                        {task.taskDeadLine}
-                    </div>
-                </BgShadow>
-            </TaskDetails>
+
+            {/* <BgShadow> */}
+            <div className='flex items-center justify-between' >
+                <TaskDetails task={task} >
+                    {task.title}
+
+                    < br />
+                    <p className='text-sm  rounded-xl'>Priority: {task.taskPriority}</p>
+                    < br />
+                    {task.taskDeadLine}
+                </TaskDetails>
+                <span onClick={() => hadndleDeleteTask(task._id)} className=' btn rounded-full bg-slate-600'>X</span>
+
+            </div>
+            {/* </BgShadow> */}
+
 
         </div >
     );

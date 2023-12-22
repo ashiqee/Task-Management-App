@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import useTasksData from "../../../hooks/useTasksData";
 
 
 const AddNewTask = ({ text }) => {
 
     const [isOpenModal, setOpenModal] = useState(false)
+    const { user } = useAuth()
+    const { refetch } = useTasksData()
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const axiosSecure = useAxiosSecure()
 
 
@@ -15,10 +20,20 @@ const AddNewTask = ({ text }) => {
     const onSubmit = async (data) => {
 
         data.status = "Todo";
-        console.log(data);
+        data.user = user?.email;
+
 
         await axiosSecure.post('/task', data).then((res) => {
-            console.log(res);
+            if (res.data.insertedId) {
+                Swal.fire({
+                    title: "Successful",
+                    text: "Your task has been added done.",
+                    icon: "success"
+                });
+                refetch()
+                setOpenModal(false)
+                reset()
+            }
         }).catch(error => console.log(error))
 
     }
